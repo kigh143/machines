@@ -49,7 +49,7 @@ export const machineSlice = createSlice({
 
     deleteMachineType: (state: MachinesState, action: any) => {
       state.machineTypes = state.machineTypes.filter(
-        (machine: Machine) => machine.id !== action.payload
+        (machine: any) => machine.id !== action.payload
       );
     },
 
