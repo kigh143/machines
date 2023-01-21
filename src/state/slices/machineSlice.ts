@@ -5,6 +5,7 @@ export interface MachineType {
   attributes: Attribute[];
   id: string;
   title: "";
+  items?: any[];
 }
 
 export interface Attribute {
@@ -53,7 +54,10 @@ export const machineSlice = createSlice({
       );
     },
 
-    setActiveType: (state: MachinesState, action: any) => {
+    setActiveType: (
+      state: MachinesState,
+      action: PayloadAction<MachineType>
+    ) => {
       state.activeMachineType = action.payload;
     },
 
@@ -99,6 +103,19 @@ export const machineSlice = createSlice({
       );
     },
 
+    AddItem: (
+      state: MachinesState,
+      action: PayloadAction<{ id: string; item: any }>
+    ) => {
+      const index = state.machineTypes.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      state.machineTypes[index].items = [
+        ...state.machineTypes[index].items,
+        action.payload.item,
+      ];
+    },
+
     setTitleField: (
       state: MachinesState,
       action: PayloadAction<{ id: string; title: string }>
@@ -125,5 +142,6 @@ export const {
   addNewField,
   removeField,
   setTitleField,
+  AddItem,
 } = machineSlice.actions;
 export default machineSlice.reducer;

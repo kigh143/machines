@@ -4,7 +4,11 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Loading from "./screens/Loading";
 import Home from "./screens/Dashboard/Home";
 import MachineType from "./screens/Dashboard/MachineType";
+import ManageTypes from "./screens/Dashboard/Manage";
 import Sidebar from "./components/Sidebar";
+import { Dimensions } from "react-native";
+
+const { width } = Dimensions.get("screen");
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -13,6 +17,7 @@ const Dashboard = () => (
   <Drawer.Navigator
     screenOptions={{
       headerShown: false,
+      drawerType: width >= 768 ? "permanent" : null,
     }}
     initialRouteName="home"
     useLegacyImplementation={false}
@@ -20,6 +25,7 @@ const Dashboard = () => (
   >
     <Drawer.Screen name="home" component={Home} />
     <Drawer.Screen name="machineType" component={MachineType} />
+    <Stack.Screen name="manageTypes" component={ManageTypes} />
   </Drawer.Navigator>
 );
 

@@ -29,7 +29,15 @@ const AddTypeForm: React.FC<any> = ({ activeMachineType }) => {
   return (
     <View style={styles.modal}>
       <View>
-        <Text>{machineTypes[machineIndex].typeName}</Text>
+        <Text
+          style={{
+            fontWeight: "bold",
+            marginVertical: 8,
+            textTransform: "uppercase",
+          }}
+        >
+          {machineTypes[machineIndex].typeName}
+        </Text>
         <Input
           label="Type Name"
           value={machineTypes[machineIndex].typeName}
@@ -136,7 +144,6 @@ const AddTypeForm: React.FC<any> = ({ activeMachineType }) => {
             </Picker>
           </View>
         </View>
-        ; ; ;
       </View>
     </View>
   );
