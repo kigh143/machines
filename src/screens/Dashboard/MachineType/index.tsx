@@ -11,6 +11,7 @@ import {
   AddItem,
   Attribute,
   editItemAnswer,
+  removeItem,
 } from "../../../state/slices/machineSlice";
 import AddItemForm from "../../../components/AddItemForm";
 import EmptyComponent from "../../../components/EmptyComponent";
@@ -70,7 +71,13 @@ const index = () => {
       <FlatList
         data={machineTypes[machineIndex].items}
         renderItem={({ item, index }) => (
-          <AddItemForm item={item} setValue={(text) => setValue(text, index)} />
+          <AddItemForm
+            item={item}
+            setValue={(text) => setValue(text, index)}
+            removeItem={() =>
+              dispatch(removeItem({ id: activeMachineType.id, index }))
+            }
+          />
         )}
         ListEmptyComponent={() => <EmptyComponent />}
         contentContainerStyle={styles.flatList}

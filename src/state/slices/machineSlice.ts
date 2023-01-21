@@ -138,6 +138,20 @@ export const machineSlice = createSlice({
       });
     },
 
+    removeItem: (
+      state: MachinesState,
+      action: PayloadAction<{ id: string; index: number }>
+    ) => {
+      const index = state.machineTypes.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      console.log({ index }, action.payload);
+
+      state.machineTypes[index].items = state.machineTypes[index].items.filter(
+        (val: any, index: number) => index !== action.payload.index
+      );
+    },
+
     setTitleField: (
       state: MachinesState,
       action: PayloadAction<{ id: string; title: string }>
@@ -166,5 +180,6 @@ export const {
   setTitleField,
   AddItem,
   editItemAnswer,
+  removeItem,
 } = machineSlice.actions;
 export default machineSlice.reducer;

@@ -5,15 +5,17 @@ import Input from "./Input";
 import CheckBoxInput from "./CheckBoxInput";
 import DateInput from "./DateInput";
 import NumberInput from "./NumberInput";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Props = {
   item: any;
   setValue: any;
+  removeItem: any;
 };
 
-const AddItemForm: React.FC<Props> = ({ item, setValue }) => {
+const AddItemForm: React.FC<Props> = ({ item, setValue, removeItem }) => {
   return (
-    <View style={{ elevation: 2, backgroundColor: "#fff" }}>
+    <View style={{ elevation: 2, backgroundColor: "#fff", marginVertical: 10 }}>
       {item.map((value: any, index: number) => {
         const key = value.name.split(" ").join("_");
         if (value.dataType === "text") {
@@ -57,6 +59,9 @@ const AddItemForm: React.FC<Props> = ({ item, setValue }) => {
           );
         }
       })}
+      <TouchableOpacity onPress={() => removeItem()}>
+        <Text>Remove</Text>
+      </TouchableOpacity>
     </View>
   );
 };

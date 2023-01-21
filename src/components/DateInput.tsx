@@ -26,17 +26,40 @@ const DateInput: React.FC<Props> = ({ label, onChange, value }) => {
   );
 
   return (
-    <View style={{ marginVertical: 5, backgroundColor: "red" }}>
-      <TouchableOpacity onPress={() => setOpen(true)}>{label}</TouchableOpacity>
-      <DatePickerModal
-        locale="en"
-        mode="single"
-        visible={open}
-        onDismiss={onDismissSingle}
-        date={date}
-        onConfirm={onConfirmSingle}
-      />
-      <Text>{value.toString()}</Text>
+    <View
+      style={{
+        marginVertical: 5,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: 50,
+        borderWidth: 1,
+        borderColor: "#666",
+        paddingHorizontal: 13,
+      }}
+    >
+      <View>
+        <TouchableOpacity onPress={() => setOpen(true)}>
+          Change {label}
+        </TouchableOpacity>
+        <DatePickerModal
+          locale="en"
+          mode="single"
+          visible={open}
+          onDismiss={onDismissSingle}
+          date={date}
+          onConfirm={onConfirmSingle}
+        />
+      </View>
+
+      <Text>
+        {new Date(value).toLocaleDateString("en-us", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </Text>
     </View>
   );
 };

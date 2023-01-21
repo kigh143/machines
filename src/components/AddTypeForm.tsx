@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   addNewField,
   Attribute,
+  deleteMachineType,
   EditFieldName,
   editMachineType,
   removeField,
@@ -29,15 +30,29 @@ const AddTypeForm: React.FC<any> = ({ activeMachineType }) => {
   return (
     <View style={styles.modal}>
       <View>
-        <Text
+        <View
           style={{
-            fontWeight: "bold",
-            marginVertical: 8,
-            textTransform: "uppercase",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {machineTypes[machineIndex].typeName}
-        </Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              marginVertical: 8,
+              textTransform: "uppercase",
+            }}
+          >
+            {machineTypes[machineIndex].typeName}
+          </Text>
+          <TouchableOpacity
+            onPress={() => dispatch(deleteMachineType(activeMachineType.id))}
+          >
+            <Text>Remove</Text>
+          </TouchableOpacity>
+        </View>
+
         <Input
           label="Type Name"
           value={machineTypes[machineIndex].typeName}
