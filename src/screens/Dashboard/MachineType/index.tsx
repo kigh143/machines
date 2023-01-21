@@ -25,13 +25,13 @@ const index = () => {
 
   const dispatch = useAppDispatch();
 
-  const addItem = () => {
-    const item = activeMachineType.attributes.map((attribute: Attribute) => {
+  const addItem = (actMacType) => {
+    const item = actMacType.attributes.map((attribute: Attribute) => {
       const key = attribute.name.split(" ").join("_");
       const default_answer = attribute.dataType === "date" ? new Date() : "";
       return { ...attribute, [key]: default_answer };
     });
-    dispatch(AddItem({ id: activeMachineType.id, item }));
+    dispatch(AddItem({ id: actMacType.id, item }));
   };
 
   const setValue = (answer: any, itemIndex: number) => {
@@ -59,7 +59,7 @@ const index = () => {
         }}
       >
         <Text>{activeMachineType.typeName}</Text>
-        <TouchableOpacity onPress={addItem}>
+        <TouchableOpacity onPress={() => addItem(activeMachineType)}>
           <Text
             style={{ fontWeight: "bold", backgroundColor: "red", padding: 8 }}
           >

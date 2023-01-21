@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginVertical: 10,
     elevation: 3,
+    paddingHorizontal:20
   },
 });
 

@@ -21,7 +21,7 @@ const AddItemForm: React.FC<Props> = ({
   title,
 }) => {
   return (
-    <View style={{ elevation: 2, backgroundColor: "#fff", marginVertical: 10 }}>
+    <View style={{ elevation: 4, backgroundColor: "#fff", marginVertical: 10, borderWidth:1, borderColor:'#888', padding:15 }}>
       <Text>{item.find((val) => title in val)[title]}</Text>
       {item.map((value: any, index: number) => {
         const key = value.name.split(" ").join("_");
