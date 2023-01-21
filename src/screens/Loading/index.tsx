@@ -11,7 +11,7 @@ const Index: React.FC<PageProps> = ({ navigation }) => {
   useEffect(() => {
     let timeOut = setTimeout(() => {
       navigation.navigate("dashboard");
-    }, 5000);
+    }, 100);
     return () => clearTimeout(timeOut);
   }, []);
 

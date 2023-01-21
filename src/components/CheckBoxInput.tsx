@@ -8,7 +8,7 @@ type Props = {
 
 const CheckBoxInput: React.FC<Props> = ({ value, onChange, label }) => {
   return (
-    <View>
+    <View style={{ margin: 10 }}>
       <Text>CheckBoxInput</Text>
     </View>
   );

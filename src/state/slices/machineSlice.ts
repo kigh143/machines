@@ -4,7 +4,7 @@ export interface MachineType {
   typeName: string;
   attributes: Attribute[];
   id: string;
-  titleFlied?: string;
+  title: "";
 }
 
 export interface Attribute {
@@ -83,6 +83,36 @@ export const machineSlice = createSlice({
       state.machineTypes[index].attributes[action.payload.index].name =
         action.payload.attribute.name;
     },
+
+    removeField: (
+      state: MachinesState,
+      action: PayloadAction<{ index: number; id: string }>
+    ) => {
+      const index = state.machineTypes.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      state.machineTypes[index].attributes = state.machineTypes[
+        index
+      ].attributes.filter(
+        (attribute: Attribute, index: number) => index !== action.payload.index
+      );
+    },
+
+    setTitleField: (
+      state: MachinesState,
+      action: PayloadAction<{ id: string; title: string }>
+    ) => {
+      state.machineTypes = state.machineTypes.map(
+        (machine_type: MachineType) => {
+          if (machine_type.id === action.payload.id) {
+            return { ...machine_type, title: action.payload.title };
+          } else {
+            return machine_type;
+          }
+        }
+      );
+    },
   },
 });
 
@@ -93,5 +123,7 @@ export const {
   setActiveType,
   EditFieldName,
   addNewField,
+  removeField,
+  setTitleField,
 } = machineSlice.actions;
 export default machineSlice.reducer;

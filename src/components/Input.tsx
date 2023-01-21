@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 type Props = {
   value: string;
@@ -8,12 +9,14 @@ type Props = {
 
 const Input: React.FC<Props> = ({ value, label, onChange }) => {
   return (
-    <TextInput
-      label={label}
-      value={value}
-      onChangeText={(text) => onChange(text)}
-      keyboardType="default"
-    />
+    <View style={{ margin: 10 }}>
+      <TextInput
+        label={label}
+        value={value}
+        onChangeText={(text) => onChange(text)}
+        keyboardType="default"
+      />
+    </View>
   );
 };
 

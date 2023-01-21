@@ -36,7 +36,7 @@ const Index: React.FC<any> = ({ navigation }) => {
         },
       ],
       typeName: "",
-      titleFlied: "",
+      title: "",
     };
     dispatch(addMachineType(newMachineType));
 

@@ -7,10 +7,13 @@ import {
   Attribute,
   EditFieldName,
   editMachineType,
+  removeField,
+  setTitleField,
 } from "../state/slices/machineSlice";
 import NumberInput from "./NumberInput";
 import DateInput from "./DateInput";
 import CheckBoxInput from "./CheckBoxInput";
+import { Picker } from "@react-native-picker/picker";
 
 const AddTypeForm: React.FC<any> = ({ close }) => {
   const { activeMachineType, machineTypes } = useAppSelector(
@@ -19,6 +22,7 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
   const [machineIndex, setMachineIndex] = useState(
     machineTypes.findIndex((item) => item.id === activeMachineType.id)
   );
+  const [selected, setSelected] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -49,91 +53,48 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
             )
           }
         />
-        {machineTypes[machineIndex].attributes.map(
-          (field: Attribute, index: number) => {
-            if (field.dataType === "text") {
+        {
+          machineTypes[machineIndex].attributes.map(
+            (field: Attribute, index: number) => {
               return (
-                <Input
-                  label={field.name}
-                  value={field.name}
-                  onChange={(text) =>
-                    dispatch(
-                      EditFieldName({
-                        id: activeMachineType.id,
-                        index,
-                        attribute: {
-                          dataType: "text",
-                          name: text,
-                        },
-                      })
-                    )
-                  }
-                />
-              );
-            }
-            if (field.dataType === "number") {
-              return (
-                <NumberInput
-                  label={field.name}
-                  value={field.name}
-                  onChange={(text) =>
-                    dispatch(
-                      EditFieldName({
-                        id: activeMachineType.id,
-                        index,
-                        attribute: {
-                          dataType: "number",
-                          name: text,
-                        },
-                      })
-                    )
-                  }
-                />
-              );
-            }
-            if (field.dataType === "date") {
-              return (
-                <DateInput
-                  label={field.name}
-                  value={field.name}
-                  onChange={(text) =>
-                    dispatch(
-                      EditFieldName({
-                        id: activeMachineType.id,
-                        index,
-                        attribute: {
-                          dataType: "date",
-                          name: text,
-                        },
-                      })
-                    )
-                  }
-                />
-              );
-            }
-            if (field.dataType === "checkbox") {
-              return (
-                <CheckBoxInput
-                  label={field.name}
-                  value={field.name}
-                  onChange={(text) =>
-                    dispatch(
-                      EditFieldName({
-                        id: activeMachineType.id,
-                        index,
-                        attribute: {
-                          dataType: "checkbox",
-                          name: text,
-                        },
-                      })
-                    )
-                  }
-                />
-              );
-            }
-          }
-        )}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View style={{ flex: 1 }}>
+                    <Input
+                      label={field.dataType}
+                      value={field.name}
+                      onChange={(text) =>
+                        dispatch(
+                          EditFieldName({
+                            id: activeMachineType.id,
+                            index,
+                            attribute: {
+                              dataType: "text",
+                              name: text,
+                            },
+                          })
+                        )
+                      }
+                    />
+                  </View>
 
+                  <TouchableOpacity
+                    onPress={() =>
+                      dispatch(removeField({ index, id: activeMachineType.id }))
+                    }
+                  >
+                    <Text>Remove</Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+          )
+        }
         <View
           style={{
             flexDirection: "row",
@@ -143,26 +104,55 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
             paddingVertical: 10,
           }}
         >
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(
-                addNewField({
-                  id: activeMachineType.id,
-                  attribute: {
-                    dataType: "number",
-                    name: "",
-                  },
-                })
-              );
-            }}
-          >
+          <View>
             <Text>Add Field</Text>
-          </TouchableOpacity>
+            <Picker
+              selectedValue={selected}
+              onValueChange={(itemValue, itemIndex) => {
+                if (itemValue === "") return;
+                dispatch(
+                  addNewField({
+                    id: activeMachineType.id,
+                    attribute: {
+                      dataType: itemValue,
+                      name: "",
+                    },
+                  })
+                );
+              }}
+            >
+              <Picker.Item label="Select type" value="" />
+              <Picker.Item label="Text" value="text" />
+              <Picker.Item label="Number" value="number" />
+              <Picker.Item label="Date" value="date" />
+              <Picker.Item label="Checkbox" value="checkbox" />
+            </Picker>
+          </View>
 
-          <TouchableOpacity onPress={() => console.log("add title field")}>
-            <Text>Add title Field</Text>
-          </TouchableOpacity>
-        </View>
+          <View>
+            <Text>Set title Field</Text>
+            <Picker
+              selectedValue={selected}
+              onValueChange={(itemValue, itemIndex) => {
+                if (itemValue === "") return;
+                dispatch(
+                  setTitleField({
+                    id: activeMachineType.id,
+                    title: itemValue,
+                  })
+                );
+              }}
+            >
+              <Picker.Item label="Select title Filed" value="" />
+              {machineTypes[machineIndex].attributes.map(
+                (attribute: Attribute) => (
+                  <Picker.Item label={attribute.name} value={attribute.name} />
+                )
+              )}
+            </Picker>
+          </View>
+        </View>;
+        ; ;
       </View>
     </View>
   );
