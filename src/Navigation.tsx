@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -11,17 +10,17 @@ const Drawer = createDrawerNavigator();
 
 const Dashboard = () => (
   <Drawer.Navigator initialRouteName="Home">
-    <Drawer.Screen name="Home" component={Home} />
-    <Drawer.Screen name="MachineType" component={MachineType} />
+    <Drawer.Screen name="home" component={Home} />
+    <Drawer.Screen name="machineType" component={MachineType} />
   </Drawer.Navigator>
 );
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Loading" component={Loading} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Navigator headerMode="none" initialRouteName="loading">
+        <Stack.Screen name="loading" component={Loading} />
+        <Stack.Screen name="dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
