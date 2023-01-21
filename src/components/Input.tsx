@@ -1,11 +1,19 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { TextInput } from "react-native-paper";
+type Props = {
+  value: string;
+  onChange: any;
+  label: string;
+};
 
-const Input = () => {
+const Input: React.FC<Props> = ({ value, label, onChange }) => {
   return (
-    <View>
-      <Text>Input</Text>
-    </View>
+    <TextInput
+      label={label}
+      value={value}
+      onChangeText={(text) => onChange(text)}
+      keyboardType="default"
+    />
   );
 };
 

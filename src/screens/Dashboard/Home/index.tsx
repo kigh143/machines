@@ -6,10 +6,12 @@ import {
   Modal,
   FlatList,
 } from "react-native";
+import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { useAppSelector } from "../../../state/hooks";
 import styles from "./styles";
 import EmptyComponent from "../../../components/EmptyComponent";
+import AddTypeForm from "../../../components/AddTypeForm";
 
 const Index: React.FC<any> = ({ navigation }) => {
   const { machineTypes } = useAppSelector(
@@ -43,6 +45,9 @@ const Index: React.FC<any> = ({ navigation }) => {
         ListEmptyComponent={() => <EmptyComponent />}
         contentContainerStyle={styles.flatList}
       />
+      <Modal animationType="slide" transparent={true} visible={open}>
+        <AddTypeForm close={openModal} />
+      </Modal>
     </SafeAreaView>
   );
 };

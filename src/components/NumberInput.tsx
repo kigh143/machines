@@ -1,5 +1,4 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { TextInput } from "react-native-paper";
 
 type Props = {
   value: string;
@@ -9,9 +8,12 @@ type Props = {
 
 const NumberInput: React.FC<Props> = ({ value, onChange, label }) => {
   return (
-    <View>
-      <Text>NumberInput</Text>
-    </View>
+    <TextInput
+      label={label}
+      value={value}
+      onChangeText={(text) => onChange(text)}
+      keyboardType="number-pad"
+    />
   );
 };
 
