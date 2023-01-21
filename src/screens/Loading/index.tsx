@@ -1,7 +1,19 @@
+import React, { useEffect } from "react";
 import { View, Text } from "react-native";
-import React from "react";
+import { NavigationProp } from "@react-navigation/native";
 
-const index = () => {
+type PageProps = {
+  navigation: any;
+};
+
+const Index: React.FC<PageProps> = ({ navigation }) => {
+  useEffect(() => {
+    let timeOut = setTimeout(() => {
+      navigation.navigate("dashboard");
+    }, 1000);
+    return () => clearTimeout(timeOut);
+  }, []);
+
   return (
     <View>
       <Text>Loading screen</Text>
@@ -9,4 +21,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

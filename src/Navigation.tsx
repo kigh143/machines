@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Dashboard = () => (
-  <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Navigator initialRouteName="home" useLegacyImplementation={false}>
     <Drawer.Screen name="home" component={Home} />
     <Drawer.Screen name="machineType" component={MachineType} />
   </Drawer.Navigator>
