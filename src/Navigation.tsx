@@ -4,12 +4,18 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Loading from "./screens/Loading";
 import Home from "./screens/Dashboard/Home";
 import MachineType from "./screens/Dashboard/MachineType";
+import Sidebar from "./components/Sidebar";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const Dashboard = () => (
-  <Drawer.Navigator initialRouteName="home" useLegacyImplementation={false}>
+  <Drawer.Navigator
+    initialRouteName="home"
+    headerMode="none"
+    useLegacyImplementation={false}
+    drawerContent={(props: any) => <Sidebar {...props} />}
+  >
     <Drawer.Screen name="home" component={Home} />
     <Drawer.Screen name="machineType" component={MachineType} />
   </Drawer.Navigator>

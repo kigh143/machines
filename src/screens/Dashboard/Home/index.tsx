@@ -1,7 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { useAppSelector } from "../../../state/hooks";
 
-const index = () => {
+const Index = () => {
+  const state = useAppSelector((state) => state.persistedReducer.machineSlice);
+  console.log(state);
   return (
     <View>
       <Text>Home Page</Text>
@@ -9,4 +12,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

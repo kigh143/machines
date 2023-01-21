@@ -1,23 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Machine {
+  id: string;
+}
+
+interface MachineType {
+  typeName: string;
+  attributes: Attribute[];
+  id: string;
+  titleFlied?: string;
+}
+
+interface Attribute {
+  dataType: string;
+  name: string;
+}
+
 export interface MachinesState {
-  value: number;
-  coords: any;
-  userType: string;
-  fcmToken: string;
-  user: any;
-  photoUrl: string;
-  activeSub: any;
+  machineTypes: MachineType[];
 }
 
 const initialState: MachinesState = {
-  value: 0,
-  coords: null,
-  userType: "",
-  fcmToken: "",
-  user: null,
-  photoUrl: "",
-  activeSub: null,
+  machineTypes: [],
 };
 
 export const machineSlice = createSlice({
@@ -25,7 +29,7 @@ export const machineSlice = createSlice({
   initialState,
   reducers: {
     addMachineType: (state: MachinesState, action: any) => {
-      state.userType = action.payload;
+      state.value = action.payload;
     },
   },
 });
