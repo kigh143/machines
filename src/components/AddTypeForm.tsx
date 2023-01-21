@@ -15,8 +15,8 @@ import DateInput from "./DateInput";
 import CheckBoxInput from "./CheckBoxInput";
 import { Picker } from "@react-native-picker/picker";
 
-const AddTypeForm: React.FC<any> = ({ close }) => {
-  const { activeMachineType, machineTypes } = useAppSelector(
+const AddTypeForm: React.FC<any> = ({ activeMachineType }) => {
+  const { machineTypes } = useAppSelector(
     (state) => state.persistedReducer.machineSlice
   );
   const [machineIndex, setMachineIndex] = useState(
@@ -28,20 +28,6 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
 
   return (
     <View style={styles.modal}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: 56,
-          marginBottom: 10,
-        }}
-      >
-        <Text>AddTpeForm</Text>
-        <TouchableOpacity onPress={() => close()}>
-          <Text>Close</Text>
-        </TouchableOpacity>
-      </View>
       <View>
         <Text>{machineTypes[machineIndex].typeName}</Text>
         <Input
@@ -53,48 +39,46 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
             )
           }
         />
-        {
-          machineTypes[machineIndex].attributes.map(
-            (field: Attribute, index: number) => {
-              return (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <Input
-                      label={field.dataType}
-                      value={field.name}
-                      onChange={(text) =>
-                        dispatch(
-                          EditFieldName({
-                            id: activeMachineType.id,
-                            index,
-                            attribute: {
-                              dataType: "text",
-                              name: text,
-                            },
-                          })
-                        )
-                      }
-                    />
-                  </View>
-
-                  <TouchableOpacity
-                    onPress={() =>
-                      dispatch(removeField({ index, id: activeMachineType.id }))
+        {machineTypes[machineIndex].attributes.map(
+          (field: Attribute, index: number) => {
+            return (
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View style={{ flex: 1 }}>
+                  <Input
+                    label={field.dataType}
+                    value={field.name}
+                    onChange={(text) =>
+                      dispatch(
+                        EditFieldName({
+                          id: activeMachineType.id,
+                          index,
+                          attribute: {
+                            dataType: "text",
+                            name: text,
+                          },
+                        })
+                      )
                     }
-                  >
-                    <Text>Remove</Text>
-                  </TouchableOpacity>
+                  />
                 </View>
-              );
-            }
-          )
-        }
+
+                <TouchableOpacity
+                  onPress={() =>
+                    dispatch(removeField({ index, id: activeMachineType.id }))
+                  }
+                >
+                  <Text>Remove</Text>
+                </TouchableOpacity>
+              </View>
+            );
+          }
+        )}
         <View
           style={{
             flexDirection: "row",
@@ -151,8 +135,8 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
               )}
             </Picker>
           </View>
-        </View>;
-        ; ;
+        </View>
+        ; ; ;
       </View>
     </View>
   );
@@ -160,9 +144,10 @@ const AddTypeForm: React.FC<any> = ({ close }) => {
 
 const styles = StyleSheet.create({
   modal: {
-    padding: 13,
-    backgroundColor: "#eee",
-    flex: 1,
+    padding: 5,
+    backgroundColor: "#fff",
+    marginVertical: 10,
+    elevation: 3,
   },
 });
 

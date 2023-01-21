@@ -9,7 +9,7 @@ type Props = {
 
 const Input: React.FC<Props> = ({ value, label, onChange }) => {
   return (
-    <View style={{ margin: 10 }}>
+    <View style={{ marginVertical: 5 }}>
       <TextInput
         label={label}
         value={value}
