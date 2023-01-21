@@ -8,19 +8,41 @@ import {
 } from "react-native";
 import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
-import { useAppSelector } from "../../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import styles from "./styles";
 import EmptyComponent from "../../../components/EmptyComponent";
 import AddTypeForm from "../../../components/AddTypeForm";
+import {
+  addMachineType,
+  MachineType,
+} from "../../../state/slices/machineSlice";
 
 const Index: React.FC<any> = ({ navigation }) => {
   const { machineTypes } = useAppSelector(
     (state) => state.persistedReducer.machineSlice
   );
-  console.log(machineTypes);
+  const dispatch = useAppDispatch();
+
   const [open, setOPen] = useState(false);
 
-  const openModal = () => setOPen((prev) => !prev);
+  const openModal = () => {
+    // create a new machine type object
+    const newMachineType: MachineType = {
+      id: uuidv4(),
+      attributes: [
+        {
+          dataType: "text",
+          name: "",
+        },
+      ],
+      typeName: "",
+      titleFlied: "",
+    };
+    dispatch(addMachineType(newMachineType));
+
+    setOPen((prev) => !prev);
+  };
+
   const toggleMenu = () => navigation.toggleDrawer();
 
   const renderTypes = ({ item }) => (
@@ -46,7 +68,7 @@ const Index: React.FC<any> = ({ navigation }) => {
         contentContainerStyle={styles.flatList}
       />
       <Modal animationType="slide" transparent={true} visible={open}>
-        <AddTypeForm close={openModal} />
+        <AddTypeForm close={() => setOPen(false)} />
       </Modal>
     </SafeAreaView>
   );
