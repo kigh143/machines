@@ -83,9 +83,11 @@ export const machineSlice = createSlice({
       const index = state.machineTypes.findIndex(
         (item) => item.id === action.payload.id
       );
-
       state.machineTypes[index].attributes[action.payload.index].name =
         action.payload.attribute.name;
+      if (action.payload.index === 0) {
+        state.machineTypes[index].title = action.payload.attribute.name;
+      }
     },
 
     removeField: (
@@ -145,7 +147,6 @@ export const machineSlice = createSlice({
       const index = state.machineTypes.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log({ index }, action.payload);
 
       state.machineTypes[index].items = state.machineTypes[index].items.filter(
         (val: any, index: number) => index !== action.payload.index

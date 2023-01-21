@@ -77,6 +77,7 @@ const index = () => {
             removeItem={() =>
               dispatch(removeItem({ id: activeMachineType.id, index }))
             }
+            title={activeMachineType.title}
           />
         )}
         ListEmptyComponent={() => <EmptyComponent />}

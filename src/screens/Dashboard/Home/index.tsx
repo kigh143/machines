@@ -28,6 +28,8 @@ const Index: React.FC<any> = ({ navigation }) => {
         renderItem={({ item, index }) => (
           <View>
             <Text>{item.typeName}</Text>
+
+            
           </View>
         )}
         ListEmptyComponent={<EmptyComponent />}
