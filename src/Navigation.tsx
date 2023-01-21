@@ -11,8 +11,10 @@ const Drawer = createDrawerNavigator();
 
 const Dashboard = () => (
   <Drawer.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
     initialRouteName="home"
-    headerMode="none"
     useLegacyImplementation={false}
     drawerContent={(props: any) => <Sidebar {...props} />}
   >
