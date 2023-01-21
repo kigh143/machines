@@ -137,7 +137,7 @@ const AddTypeForm: React.FC<any> = ({ activeMachineType }) => {
           </View>
 
           <View>
-            <Text>Set title Field</Text>
+            <Text>Set title Field : {machineTypes[machineIndex].title}</Text>
             <Picker
               selectedValue={selected}
               onValueChange={(itemValue, itemIndex) => {

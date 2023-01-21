@@ -42,7 +42,7 @@ const Index: React.FC<any> = ({ navigation }) => {
                 flexDirection: "row",
               }}
             >
-              <Text>{item.typeName}</Text>
+              <Text style={{fontSize:17, fontWeight:'bold'}}>{item.typeName}</Text>
               <TouchableOpacity
                 onPress={() => {
                   const newItem = item.attributes.map(

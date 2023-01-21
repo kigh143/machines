@@ -21,7 +21,7 @@ const index = () => {
   const { activeMachineType, machineTypes } = useAppSelector(
     (state) => state.persistedReducer.machineSlice
   );
-  const [machineIndex, setMachineIndex] = useState(0);
+  const [machineIndex, setMachineIndex] = useState(null);
 
   const dispatch = useAppDispatch();
 
@@ -58,8 +58,16 @@ const index = () => {
           backgroundColor: "#fff",
         }}
       >
-        <Text>{activeMachineType.typeName}</Text>
-        <TouchableOpacity onPress={() => addItem(activeMachineType)}>
+        <Text style={{ textTransform: "capitalize", fontWeight: "bold" }}>
+          {activeMachineType.typeName}
+        </Text>
+        <TouchableOpacity
+          onPress={() => addItem(activeMachineType)}
+          style={{
+            padding: 8,
+            backgroundColor: "#566",
+          }}
+        >
           <Text
             style={{ fontWeight: "bold", backgroundColor: "red", padding: 8 }}
           >
@@ -68,21 +76,23 @@ const index = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        data={machineTypes[machineIndex].items}
-        renderItem={({ item, index }) => (
-          <AddItemForm
-            item={item}
-            setValue={(text) => setValue(text, index)}
-            removeItem={() =>
-              dispatch(removeItem({ id: activeMachineType.id, index }))
-            }
-            title={activeMachineType.title}
-          />
-        )}
-        ListEmptyComponent={() => <EmptyComponent />}
-        contentContainerStyle={styles.flatList}
-      />
+      {machineIndex !== null ? (
+        <FlatList
+          data={machineTypes[machineIndex].items}
+          renderItem={({ item, index }) => (
+            <AddItemForm
+              item={item}
+              setValue={(text) => setValue(text, index)}
+              removeItem={() =>
+                dispatch(removeItem({ id: activeMachineType.id, index }))
+              }
+              title={machineTypes[machineIndex].title}
+            />
+          )}
+          ListEmptyComponent={() => <EmptyComponent />}
+          contentContainerStyle={styles.flatList}
+        />
+      ) : null}
     </SafeAreaView>
   );
 };
