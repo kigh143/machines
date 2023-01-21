@@ -38,6 +38,7 @@ const Index: React.FC<Props> = ({ navigation }) => {
       ],
       typeName: "",
       title: "",
+      items: [],
     };
     dispatch(addMachineType(newMachineType));
   };

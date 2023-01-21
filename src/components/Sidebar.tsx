@@ -33,15 +33,15 @@ const Sidebar: React.FC<any> = (props) => {
           <Text style={styles.menuItemText}>Dashboard</Text>
         </TouchableOpacity>
 
-        {machine_types.map((machine_types: MachineType) => (
+        {machine_types.map((machine_type: MachineType) => (
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate("machineType");
-              dispatch(setActiveType(machine_types));
+              dispatch(setActiveType(machine_type));
             }}
             style={styles.menuItem}
           >
-            <Text style={styles.menuItemText}>{machine_types.typeName}</Text>
+            <Text style={styles.menuItemText}>{machine_type.typeName}</Text>
           </TouchableOpacity>
         ))}
 

@@ -26,7 +26,7 @@ const DateInput: React.FC<Props> = ({ label, onChange, value }) => {
   );
 
   return (
-    <View style={{marginVertical:5}}>
+    <View style={{ marginVertical: 5, backgroundColor: "red" }}>
       <TouchableOpacity onPress={() => setOpen(true)}>{label}</TouchableOpacity>
       <DatePickerModal
         locale="en"
@@ -36,6 +36,7 @@ const DateInput: React.FC<Props> = ({ label, onChange, value }) => {
         date={date}
         onConfirm={onConfirmSingle}
       />
+      <Text>{value.toString()}</Text>
     </View>
   );
 };

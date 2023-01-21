@@ -1,17 +1,23 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from "react";
+import { View } from "react-native";
+import { TextInput } from "react-native-paper";
 type Props = {
   value: string;
   onChange: any;
   label: string;
 };
 
-const CheckBoxInput: React.FC<Props> = ({ value, onChange, label }) => {
+const CheckBoxInput: React.FC<Props> = ({ value, label, onChange }) => {
   return (
     <View style={{ marginVertical: 5 }}>
-      <Text>CheckBoxInput</Text>
+      <TextInput
+        label={label}
+        value={value}
+        onChangeText={(text) => onChange(text)}
+        keyboardType="default"
+      />
     </View>
   );
 };
 
-export default CheckBoxInput
+export default CheckBoxInput;

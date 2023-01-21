@@ -15,6 +15,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
   machineSlice,
@@ -23,7 +24,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   version: 1,
-  storage: AsyncStorage,
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
