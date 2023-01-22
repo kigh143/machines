@@ -43,10 +43,10 @@ const index = () => {
       (item) => item.id === activeMachineType.id
     );
     setMachineIndex(currentIndex);
-  }, []);
+  }, [activeMachineType]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f1f1f1" }}>
       <View
         style={{
           flexDirection: "row",
@@ -91,6 +91,7 @@ const index = () => {
           )}
           ListEmptyComponent={() => <EmptyComponent />}
           contentContainerStyle={styles.flatList}
+          keyExtractor={item => item.id}
         />
       ) : null}
     </SafeAreaView>

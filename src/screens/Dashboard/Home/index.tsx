@@ -34,7 +34,7 @@ const Index: React.FC<any> = ({ navigation }) => {
       <FlatList
         data={machineTypes}
         renderItem={({ item, index }) => (
-          <View>
+          <View style={{ marginVertical: 20 }}>
             <View
               style={{
                 justifyContent: "space-between",
@@ -42,8 +42,11 @@ const Index: React.FC<any> = ({ navigation }) => {
                 flexDirection: "row",
               }}
             >
-              <Text style={{fontSize:17, fontWeight:'bold'}}>{item.typeName}</Text>
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+                {item.typeName}
+              </Text>
               <TouchableOpacity
+               style={{backgroundColor:'orange', padding:8}}
                 onPress={() => {
                   const newItem = item.attributes.map(
                     (attribute: Attribute) => {
