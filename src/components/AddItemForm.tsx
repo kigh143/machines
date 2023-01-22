@@ -12,6 +12,7 @@ type Props = {
   setValue: any;
   removeItem: any;
   title: string;
+  attributes:Attribute[]
 };
 
 const AddItemForm: React.FC<Props> = ({
@@ -19,7 +20,11 @@ const AddItemForm: React.FC<Props> = ({
   setValue,
   removeItem,
   title,
+  attributes
 }) => {
+
+  
+
   return (
     <View
       style={{

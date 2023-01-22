@@ -83,8 +83,10 @@ export const machineSlice = createSlice({
       const index = state.machineTypes.findIndex(
         (item) => item.id === action.payload.id
       );
+
       state.machineTypes[index].attributes[action.payload.index].name =
         action.payload.attribute.name;
+      // set the title if the index === 0
       if (action.payload.index === 0) {
         state.machineTypes[index].title = action.payload.attribute.name;
       }
